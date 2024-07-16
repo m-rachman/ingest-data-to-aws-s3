@@ -1,0 +1,23 @@
+[2024-07-10 17:07:53,391] {taskinstance.py:1159} INFO - Dependencies all met for <TaskInstance: spotify_to_s3.fetch_top_50_viral_indo manual__2024-07-10T17:07:52.406561+00:00 [queued]>
+[2024-07-10 17:07:53,518] {taskinstance.py:1159} INFO - Dependencies all met for <TaskInstance: spotify_to_s3.fetch_top_50_viral_indo manual__2024-07-10T17:07:52.406561+00:00 [queued]>
+[2024-07-10 17:07:53,519] {taskinstance.py:1356} INFO - 
+--------------------------------------------------------------------------------
+[2024-07-10 17:07:53,519] {taskinstance.py:1357} INFO - Starting attempt 1 of 2
+[2024-07-10 17:07:53,519] {taskinstance.py:1358} INFO - 
+--------------------------------------------------------------------------------
+[2024-07-10 17:07:53,526] {taskinstance.py:1377} INFO - Executing <Task(PythonOperator): fetch_top_50_viral_indo> on 2024-07-10 17:07:52.406561+00:00
+[2024-07-10 17:07:53,529] {standard_task_runner.py:52} INFO - Started process 1666 to run task
+[2024-07-10 17:07:53,531] {standard_task_runner.py:79} INFO - Running: ['***', 'tasks', 'run', 'spotify_to_s3', 'fetch_top_50_viral_indo', 'manual__2024-07-10T17:07:52.406561+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/upload_data_s3.py', '--cfg-path', '/tmp/tmpxsyzm5xd', '--error-file', '/tmp/tmpsukmvs5i']
+[2024-07-10 17:07:53,532] {standard_task_runner.py:80} INFO - Job 16: Subtask fetch_top_50_viral_indo
+[2024-07-10 17:07:53,587] {task_command.py:369} INFO - Running <TaskInstance: spotify_to_s3.fetch_top_50_viral_indo manual__2024-07-10T17:07:52.406561+00:00 [running]> on host be84cfafb07d
+[2024-07-10 17:07:53,634] {taskinstance.py:1571} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=spotify_to_s3
+AIRFLOW_CTX_TASK_ID=fetch_top_50_viral_indo
+AIRFLOW_CTX_EXECUTION_DATE=2024-07-10T17:07:52.406561+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2024-07-10T17:07:52.406561+00:00
+[2024-07-10 17:07:54,307] {python.py:173} INFO - Done. Returned value was: None
+[2024-07-10 17:07:54,314] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=spotify_to_s3, task_id=fetch_top_50_viral_indo, execution_date=20240710T170752, start_date=20240710T170753, end_date=20240710T170754
+[2024-07-10 17:07:54,327] {local_task_job.py:156} INFO - Task exited with return code 0
+[2024-07-10 17:07:54,348] {local_task_job.py:273} INFO - 0 downstream tasks scheduled from follow-on schedule check

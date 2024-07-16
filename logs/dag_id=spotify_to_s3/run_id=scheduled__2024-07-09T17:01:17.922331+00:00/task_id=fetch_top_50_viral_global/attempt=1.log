@@ -1,0 +1,24 @@
+[2024-07-10 17:01:28,139] {taskinstance.py:1159} INFO - Dependencies all met for <TaskInstance: spotify_to_s3.fetch_top_50_viral_global scheduled__2024-07-09T17:01:17.922331+00:00 [queued]>
+[2024-07-10 17:01:28,266] {taskinstance.py:1159} INFO - Dependencies all met for <TaskInstance: spotify_to_s3.fetch_top_50_viral_global scheduled__2024-07-09T17:01:17.922331+00:00 [queued]>
+[2024-07-10 17:01:28,267] {taskinstance.py:1356} INFO - 
+--------------------------------------------------------------------------------
+[2024-07-10 17:01:28,268] {taskinstance.py:1357} INFO - Starting attempt 1 of 2
+[2024-07-10 17:01:28,268] {taskinstance.py:1358} INFO - 
+--------------------------------------------------------------------------------
+[2024-07-10 17:01:28,279] {taskinstance.py:1377} INFO - Executing <Task(PythonOperator): fetch_top_50_viral_global> on 2024-07-09 17:01:17.922331+00:00
+[2024-07-10 17:01:28,285] {standard_task_runner.py:52} INFO - Started process 1250 to run task
+[2024-07-10 17:01:28,289] {standard_task_runner.py:79} INFO - Running: ['***', 'tasks', 'run', 'spotify_to_s3', 'fetch_top_50_viral_global', 'scheduled__2024-07-09T17:01:17.922331+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/upload_data_s3.py', '--cfg-path', '/tmp/tmp_rge8vrc', '--error-file', '/tmp/tmphbe6css5']
+[2024-07-10 17:01:28,291] {standard_task_runner.py:80} INFO - Job 6: Subtask fetch_top_50_viral_global
+[2024-07-10 17:01:28,308] {logging_mixin.py:115} WARNING - /home/***/.local/lib/python3.7/site-packages/***/configuration.py:470 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2024-07-10 17:01:28,333] {task_command.py:369} INFO - Running <TaskInstance: spotify_to_s3.fetch_top_50_viral_global scheduled__2024-07-09T17:01:17.922331+00:00 [running]> on host be84cfafb07d
+[2024-07-10 17:01:28,375] {taskinstance.py:1571} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=spotify_to_s3
+AIRFLOW_CTX_TASK_ID=fetch_top_50_viral_global
+AIRFLOW_CTX_EXECUTION_DATE=2024-07-09T17:01:17.922331+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2024-07-09T17:01:17.922331+00:00
+[2024-07-10 17:01:28,962] {python.py:173} INFO - Done. Returned value was: None
+[2024-07-10 17:01:28,969] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=spotify_to_s3, task_id=fetch_top_50_viral_global, execution_date=20240709T170117, start_date=20240710T170128, end_date=20240710T170128
+[2024-07-10 17:01:29,010] {local_task_job.py:156} INFO - Task exited with return code 0
+[2024-07-10 17:01:29,032] {local_task_job.py:273} INFO - 1 downstream tasks scheduled from follow-on schedule check

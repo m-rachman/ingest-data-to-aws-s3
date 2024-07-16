@@ -1,0 +1,32 @@
+[2024-07-10 16:47:17,411] {processor.py:153} INFO - Started process (PID=377) to work on /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:47:17,412] {processor.py:641} INFO - Processing file /opt/airflow/dags/get_quotes.py for tasks to queue
+[2024-07-10 16:47:17,412] {logging_mixin.py:115} INFO - [2024-07-10 16:47:17,412] {dagbag.py:507} INFO - Filling up the DagBag from /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:47:17,426] {processor.py:651} INFO - DAG(s) dict_keys(['simple_quotes']) retrieved from /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:47:17,486] {logging_mixin.py:115} INFO - [2024-07-10 16:47:17,486] {manager.py:508} INFO - Created Permission View: can edit on DAG:simple_quotes
+[2024-07-10 16:47:17,494] {logging_mixin.py:115} INFO - [2024-07-10 16:47:17,494] {manager.py:508} INFO - Created Permission View: can read on DAG:simple_quotes
+[2024-07-10 16:47:17,504] {logging_mixin.py:115} INFO - [2024-07-10 16:47:17,503] {manager.py:508} INFO - Created Permission View: can delete on DAG:simple_quotes
+[2024-07-10 16:47:17,505] {logging_mixin.py:115} INFO - [2024-07-10 16:47:17,505] {dag.py:2371} INFO - Sync 1 DAGs
+[2024-07-10 16:47:17,512] {logging_mixin.py:115} INFO - [2024-07-10 16:47:17,512] {dag.py:2390} INFO - Creating ORM DAG for simple_quotes
+[2024-07-10 16:47:17,521] {logging_mixin.py:115} INFO - [2024-07-10 16:47:17,521] {dag.py:2919} INFO - Setting next_dagrun for simple_quotes to 2024-06-01T00:00:00+00:00, run_after=2024-07-01T00:00:00+00:00
+[2024-07-10 16:47:17,529] {processor.py:161} INFO - Processing /opt/airflow/dags/get_quotes.py took 0.119 seconds
+[2024-07-10 16:47:47,751] {processor.py:153} INFO - Started process (PID=404) to work on /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:47:47,753] {processor.py:641} INFO - Processing file /opt/airflow/dags/get_quotes.py for tasks to queue
+[2024-07-10 16:47:47,754] {logging_mixin.py:115} INFO - [2024-07-10 16:47:47,754] {dagbag.py:507} INFO - Filling up the DagBag from /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:47:47,771] {processor.py:651} INFO - DAG(s) dict_keys(['simple_quotes']) retrieved from /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:47:47,794] {logging_mixin.py:115} INFO - [2024-07-10 16:47:47,794] {dag.py:2371} INFO - Sync 1 DAGs
+[2024-07-10 16:47:47,820] {logging_mixin.py:115} INFO - [2024-07-10 16:47:47,820] {dag.py:2919} INFO - Setting next_dagrun for simple_quotes to 2024-06-01T00:00:00+00:00, run_after=2024-07-01T00:00:00+00:00
+[2024-07-10 16:47:47,827] {processor.py:161} INFO - Processing /opt/airflow/dags/get_quotes.py took 0.080 seconds
+[2024-07-10 16:48:18,086] {processor.py:153} INFO - Started process (PID=440) to work on /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:48:18,088] {processor.py:641} INFO - Processing file /opt/airflow/dags/get_quotes.py for tasks to queue
+[2024-07-10 16:48:18,089] {logging_mixin.py:115} INFO - [2024-07-10 16:48:18,089] {dagbag.py:507} INFO - Filling up the DagBag from /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:48:18,104] {processor.py:651} INFO - DAG(s) dict_keys(['simple_quotes']) retrieved from /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:48:18,127] {logging_mixin.py:115} INFO - [2024-07-10 16:48:18,127] {dag.py:2371} INFO - Sync 1 DAGs
+[2024-07-10 16:48:18,143] {logging_mixin.py:115} INFO - [2024-07-10 16:48:18,142] {dag.py:2919} INFO - Setting next_dagrun for simple_quotes to 2024-06-01T00:00:00+00:00, run_after=2024-07-01T00:00:00+00:00
+[2024-07-10 16:48:18,149] {processor.py:161} INFO - Processing /opt/airflow/dags/get_quotes.py took 0.068 seconds
+[2024-07-10 16:48:48,422] {processor.py:153} INFO - Started process (PID=477) to work on /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:48:48,423] {processor.py:641} INFO - Processing file /opt/airflow/dags/get_quotes.py for tasks to queue
+[2024-07-10 16:48:48,424] {logging_mixin.py:115} INFO - [2024-07-10 16:48:48,424] {dagbag.py:507} INFO - Filling up the DagBag from /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:48:48,442] {processor.py:651} INFO - DAG(s) dict_keys(['simple_quotes']) retrieved from /opt/airflow/dags/get_quotes.py
+[2024-07-10 16:48:48,472] {logging_mixin.py:115} INFO - [2024-07-10 16:48:48,472] {dag.py:2371} INFO - Sync 1 DAGs
+[2024-07-10 16:48:48,493] {logging_mixin.py:115} INFO - [2024-07-10 16:48:48,492] {dag.py:2919} INFO - Setting next_dagrun for simple_quotes to 2024-06-01T00:00:00+00:00, run_after=2024-07-01T00:00:00+00:00
+[2024-07-10 16:48:48,508] {processor.py:161} INFO - Processing /opt/airflow/dags/get_quotes.py took 0.092 seconds
