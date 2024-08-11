@@ -1,14 +1,11 @@
+#update
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.hooks.S3_hook import S3Hook
+from airflow.models import Variable
 from datetime import datetime, timedelta
 import requests
 import json
-import base64
-import os
-from dotenv import load_dotenv
-load_dotenv()
-
 
 # Define default arguments for the DAG
 default_args = {
@@ -18,24 +15,21 @@ default_args = {
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retry_delay': timedelta(minutes=1),
 }
 
 # Initialize the DAG
 dag = DAG(
     'spotify_to_s3',
     default_args=default_args,
-    description='Fetch Spotify data and upload to S3',
+    description='Fetch Spotify data and upload to S3 sequentially',
     schedule_interval=timedelta(days=1),
     catchup=False,
 )
-var_client_id = os.getenv('client_id')
-var_client_secret = os.environ.get('client_secret')
-
 
 # Spotify API credentials
-client_id = var_client_id
-client_secret = var_client_secret
+client_id = Variable.get('client_id')
+client_secret = Variable.get('client_secret')
 
 # Spotify playlist IDs
 playlists = {
@@ -46,72 +40,65 @@ playlists = {
     'today_top_hits': '37i9dQZF1DXcBWIGoYBM5M'
 }
 
-def get_access_token():
-    token_url = 'https://accounts.spotify.com/api/token'
-    client_creds = f"{client_id}:{client_secret}"
-    client_creds_b64 = base64.b64encode(client_creds.encode()).decode()
-    
-    token_data = {"grant_type": "client_credentials"}
-    token_headers = {"Authorization": f"Basic {client_creds_b64}"}
-    
-    token_response = requests.post(token_url, data=token_data, headers=token_headers)
-    access_token = token_response.json()['access_token']
-    
-    return access_token
+def fetch_playlist_data(playlist_id, **kwargs):
+    # Fetch access token
+    auth_url = 'https://accounts.spotify.com/api/token'
+    auth_response = requests.post(auth_url, {
+        'grant_type': 'client_credentials',
+        'client_id': client_id,
+        'client_secret': client_secret,
+    })
+    auth_response_data = auth_response.json()
+    access_token = auth_response_data['access_token']
 
-def fetch_spotify_data(playlist_id, **kwargs):
-    access_token = get_access_token()
-    headers = {'Authorization': f'Bearer {access_token}'}
-    
-    url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
-    response = requests.get(url, headers=headers)
-    data = response.json()
-    
-    # Store data to XCom
-    kwargs['ti'].xcom_push(key=f'spotify_data_{playlist_id}', value=data)
+    # Fetch playlist data
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+    }
+    playlist_url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
+    response = requests.get(playlist_url, headers=headers)
+    playlist_data = response.json()
 
-def upload_to_s3(**kwargs):
-    combined_data = {}
-    for playlist_name, playlist_id in playlists.items():
-        data = kwargs['ti'].xcom_pull(key=f'spotify_data_{playlist_id}', task_ids=f'fetch_{playlist_name}')
-        combined_data[playlist_name] = data
-    
-    # Convert data to JSON string
-    data_json = json.dumps(combined_data)
-    
-    # Write JSON data to a temporary file
-    temp_file = '/tmp/spotify_data.json'
-    with open(temp_file, 'w') as f:
-        f.write(data_json)
-    
-    # Initialize S3 hook
-    s3 = S3Hook('aws_default')
-    
-    # Upload file to S3
-    s3.load_file(temp_file, 'spotify_data/spotify_data.json', bucket_name='project-rachman-2024', replace=True)
-    
-    # Remove temporary file
-    os.remove(temp_file)
+    # Push the data to XCom
+    return playlist_data
 
-# Define fetch tasks
+def upload_to_s3(playlist_name, **kwargs):
+    # Pull the playlist data from XCom
+    ti = kwargs['ti']
+    playlist_data = ti.xcom_pull(task_ids=f'fetch_data_{playlist_name}')
+    
+    # Convert playlist data to JSON
+    json_data = json.dumps(playlist_data, indent=4)
+
+    # Define S3 bucket and file name
+    s3_bucket = 'project-rachman-2024'
+    s3_key = f'spotify_data/{playlist_name}.json'
+
+    # Upload to S3
+    s3 = S3Hook(aws_conn_id='aws_default')
+    s3.load_string(string_data=json_data, key=s3_key, bucket_name=s3_bucket, replace=True)
+
+# Create tasks for fetching and uploading each playlist
+previous_task = None
 for playlist_name, playlist_id in playlists.items():
     fetch_task = PythonOperator(
-        task_id=f'fetch_{playlist_name}',
+        task_id=f'fetch_data_{playlist_name}',
+        python_callable=fetch_playlist_data,
+        op_args=[playlist_id],
         provide_context=True,
-        python_callable=fetch_spotify_data,
-        op_kwargs={'playlist_id': playlist_id},
         dag=dag,
     )
-    
-    # Set task dependencies
-    if 'upload_task' in locals():
-        upload_task.set_upstream(fetch_task)
-    else:
-        upload_task = PythonOperator(
-            task_id='upload_to_s3',
-            provide_context=True,
-            python_callable=upload_to_s3,
-            dag=dag,
-        )
-        upload_task.set_upstream(fetch_task)
 
+    upload_task = PythonOperator(
+        task_id=f'upload_{playlist_name}_to_s3',
+        python_callable=upload_to_s3,
+        op_args=[playlist_name],
+        provide_context=True,
+        dag=dag,
+    )
+
+    if previous_task:
+        previous_task >> fetch_task
+    
+    fetch_task >> upload_task
+    previous_task = upload_task
