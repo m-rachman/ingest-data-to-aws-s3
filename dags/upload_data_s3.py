@@ -71,7 +71,7 @@ def upload_to_s3(playlist_name, **kwargs):
     json_data = json.dumps(playlist_data, indent=4)
 
     # Define S3 bucket and file name
-    s3_bucket = 'project-rachman-2024'
+    s3_bucket = <'your-s3-bucket'>
     s3_key = f'spotify_data/{playlist_name}.json'
 
     # Upload to S3
