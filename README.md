@@ -31,8 +31,10 @@ AIRFLOW_UID=50000
 POSTGRES_USER=airflow
 POSTGRES_PASSWORD=airflow
 POSTGRES_DB=airflow
-AWS_ACCESS_KEY_ID=<your_aws_access_key_id>
-AWS_SECRET_ACCESS_KEY=<your_aws_secret_access_key>
+AWS_ACCESS_KEY_ID=<your_aws_access_key_id> # Connection in airflow
+AWS_SECRET_ACCESS_KEY=<your_aws_secret_access_key> # Connection in airflow
+CLIENT_ID = <your-spotify-client-id> # Variable in airflow
+SECRET_key = <your-spotify-secret-key> # Variable in airflow
 S3_BUCKET_NAME=<your_s3_bucket_name>
 ```
 
